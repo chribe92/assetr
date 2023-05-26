@@ -15,18 +15,23 @@ returns(get_price, type = c("log", "simple"))
 Returns a data.frame() containing historical closing return observations for the provided data.frame()
 }
 \description{
-This function calculates log or simple returns for a data frame. It is designed to be used with the `get_price()` function from the `assetr` package, but can also be applied to any data frame that has a date column in the first column and prices in the remaining columns.
+This function calculates log or simple returns for a data frame.
+It is designed to be used with the `get_price()` function from the `assetr` package,
+but can also be applied to any data frame that has a date column in the first column and prices in the remaining columns.
 }
 \examples{
 
 # Obtaining historical price data
-prices <- get_price(c("AAPL", "TSLA"),
+df_prices <- get_price(c("AAPL", "TSLA"),
                     "2017-01-01",
                     "2023-01-01",
                     omit_na = T,
                     frequency = "daily")
 
 # Calculate log returns
-returns(prices, type = "log")
+df_returns <- returns(prices, type = "log")
 
+}
+\author{
+Christian André Berntsen
 }

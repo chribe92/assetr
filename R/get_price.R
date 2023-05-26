@@ -41,7 +41,11 @@
 #'   frequency = "monthly"
 #'             )
 #'
-get_price <- function(tickers, start_date, end_date, omit_na = FALSE, frequency = "daily") {
+get_price <- function(tickers,
+                      start_date= (lubridate::today()-365),
+                      end_date = lubridate::today(),
+                      omit_na = FALSE,
+                      frequency = "daily") {
 
   start_date <- as.Date(start_date)
   end_date <- as.Date(end_date)
@@ -58,7 +62,8 @@ get_price <- function(tickers, start_date, end_date, omit_na = FALSE, frequency 
     stock_data <- quantmod::getSymbols(ticker,
                                        from = start_date,
                                        to = end_date,
-                                       auto.assign = FALSE)
+                                       auto.assign = FALSE
+                                       )
 
     price_col <- paste0(ticker,
                         ".Close")

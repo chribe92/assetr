@@ -4,7 +4,13 @@
 \alias{get_price}
 \title{Get Stock Price Data}
 \usage{
-get_price(tickers, start_date, end_date, omit_na = FALSE, frequency = "daily")
+get_price(
+  tickers,
+  start_date = (lubridate::today() - 365),
+  end_date = lubridate::today(),
+  omit_na = FALSE,
+  frequency = "daily"
+)
 }
 \arguments{
 \item{tickers}{A character vector or a concatenated string specifying one or several asset symbols.}
