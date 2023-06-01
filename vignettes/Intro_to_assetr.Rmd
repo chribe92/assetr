@@ -1,0 +1,35 @@
+---
+title: "Introduction to assetr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to assetr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(assetr)
+```
+
+# Simplifying Stock and Asset Analysis in R
+The `assetr` package is a powerful tool designed for stock and asset analysis in R. While still in its early stages of development, `assetr` aims to become an essential extension of existing packages, providing a simplified and intuitive approach to analysing stocks and assets.
+
+## Key Features
+- **Streamlined Analysis**: assetr aims to streamline the analysis process, making it easier for both beginners and experienced users to perform comprehensive stock and asset analysis in R.
+
+- **Simplification of Existing Packages**: assetr builds upon existing packages and simplifies their functionality, allowing users to perform complex tasks with fewer lines of code.
+
+- **Datasets for screening**: assetr includes a wide range of datasets that are essential for comprehensive screening and analysis.
+
+
+## Getting Started
+To start using assetr, simply install the package from CRAN using the install.packages("assetr") command. Once installed, load the package into your R session with the library(assetr) command.
+
+## Package Dependencies
