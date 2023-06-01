@@ -42,7 +42,7 @@
 #'             )
 #'
 get_price <- function(tickers,
-                      start_date= (lubridate::today()-365),
+                      start_date = (lubridate::today() - 365),
                       end_date = lubridate::today(),
                       omit_na = FALSE,
                       frequency = "daily") {
@@ -63,10 +63,9 @@ get_price <- function(tickers,
                                        from = start_date,
                                        to = end_date,
                                        auto.assign = FALSE
-                                       )
+    )
 
-    price_col <- paste0(ticker,
-                        ".Close")
+    price_col <- paste0(ticker, ".Close")
 
     df <- data.frame(date = zoo::index(stock_data),
                      Close = zoo::coredata(stock_data[, price_col]))
@@ -84,19 +83,37 @@ get_price <- function(tickers,
   if (omit_na) {
     merged_df <- merged_df[complete.cases(merged_df), ]
   }
-  rownames(merged_df) <- NULL
 
   if (frequency == "monthly") {
     # Set the date to the first day of each month
     merged_df$date <- as.Date(format(merged_df$date, "%Y-%m-01"))
-    merged_df <- aggregate(. ~ date, data = merged_df, FUN = mean)
+    aggregated_df <- data.frame(date = unique(merged_df$date), stringsAsFactors = FALSE)
+
+    for (col in names(merged_df)[-1]) {
+      aggregated_df[[col]] <- aggregate(merged_df[[col]], by = list(merged_df$date), FUN = function(x) mean(x, na.rm = !omit_na))$x
+    }
+
+    merged_df <- aggregated_df
+
   } else if (frequency == "yearly") {
     # Set the date to the first day of each year
     merged_df$date <- as.Date(format(merged_df$date, "%Y-01-01"))
-    merged_df <- aggregate(. ~ date, data = merged_df, FUN = mean)
+    aggregated_df <- data.frame(date = unique(merged_df$date), stringsAsFactors = FALSE)
+
+    for (col in names(merged_df)[-1]) {
+      aggregated_df[[col]] <- aggregate(merged_df[[col]], by = list(merged_df$date), FUN = function(x) mean(x, na.rm = !omit_na))$x
+    }
+
+    merged_df <- aggregated_df
   }
+
+  # Replace "nan" with "NA" in each data frame
+  for (i in seq_along(merged_df)) {
+    merged_df[[i]][is.nan(merged_df[[i]])] <- NA
+  }
+
+  rownames(merged_df) <- NULL
 
   return(merged_df)
 }
-
 
