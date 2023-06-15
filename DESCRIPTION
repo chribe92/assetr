@@ -1,9 +1,9 @@
 Package: assetr
-Title: Your package title
+Title: Asset analysis
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: A brief description of what your package does.
+    person("Christian", "Berntsen", email = "christian.berntsen96@gmail.com", role = c("aut", "cre"))
+Description: Simplifies multiple asset analysis
 License: MIT
 Encoding: UTF-8
 Imports:
