@@ -4,7 +4,7 @@
 \alias{descr_stat}
 \title{Generate Descriptive Statistics For A Specific Period Or The Entire Dataset}
 \usage{
-descr_stat(data, start_date = NULL, end_date)
+descr_stat(prices, start_date, end_date, day_count, digits)
 }
 \arguments{
 \item{data}{A data.frame() containing dates in the first column and numbers in the remaining columns}
@@ -12,6 +12,10 @@ descr_stat(data, start_date = NULL, end_date)
 \item{start_date}{An optional string in the format "YYYY-MM-DD" indicating the start date of the data retrieval}
 
 \item{end_date}{An optional string in the format "YYYY-MM-DD" indicating the end date of the data retrieval}
+
+\item{day_count}{Annualised measure for return and standard deviation}
+
+\item{digits}{A number that determines the decimal places for rounding numbers}
 }
 \value{
 Returns a data.frame() that includes a range of descriptive statistics for the given input data.frame()
@@ -21,6 +25,10 @@ Generate Descriptive Statistics For A Specific Period Or The Entire Dataset
 }
 \examples{
 
-df <- descr_stat(prices, start_date = "2022-01-01", end_date = "2023-01-01")
+df <- descr_stat(prices,
+                 start_date = "2022-01-01",
+                 end_date = "2023-01-01",
+                 day_count = 252,
+                 digits = 2)
 
 }

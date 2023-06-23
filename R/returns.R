@@ -25,7 +25,7 @@
 #' # Calculate log returns
 #' df_returns <- returns(prices, type = "log")
 #'
-returns <- function(get_price, type = c("log", "simple")) {
+returns <- function(get_price, type = "log") {
 
   if (!is.data.frame(get_price)) {
     message(paste0("Input data must be of type dataframe, and have a date column in the first row, or be of type",
@@ -42,8 +42,8 @@ returns <- function(get_price, type = c("log", "simple")) {
     if (type == "log") {
       returns <- diff(log(get_price[,2]))
     }
-    dates <- get_price[-1, 1]
-    return_data <- data.frame(dates, returns)
+    date <- get_price[-1, 1]
+    return_data <- data.frame(date, returns)
     colnames(return_data)[2] <- colnames(get_price)[2]
     return(return_data)
 
@@ -67,8 +67,8 @@ returns <- function(get_price, type = c("log", "simple")) {
       message("Invalid type. Allowed values are 'log' or 'simple'.")
       return()
     }
-    dates <- get_price[-1, 1]
-    return_data <- data.frame(dates, returns)
+    date <- get_price[-1, 1]
+    return_data <- data.frame(date, returns)
 
     return(return_data)
   }

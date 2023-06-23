@@ -3,7 +3,10 @@
 #' @param data A data.frame() containing dates in the first column and numbers in the remaining columns
 #' @param start_date An optional string in the format "YYYY-MM-DD" indicating the start date of the data retrieval
 #' @param end_date An optional string in the format "YYYY-MM-DD" indicating the end date of the data retrieval
-#' @param day_count Annualised measure for return and standard deviation -
+#' @param day_count Annualised measure for return and standard deviation
+#' @param digits A number that determines the decimal places for rounding numbers
+#'
+#' @usage descr_stat(prices, start_date, end_date, day_count, digits)
 #'
 #' @return Returns a data.frame() that includes a range of descriptive statistics for the given input data.frame()
 #' @export
@@ -13,12 +16,14 @@
 #' df <- descr_stat(prices,
 #'                  start_date = "2022-01-01",
 #'                  end_date = "2023-01-01",
-#'                  day_count = 252)
+#'                  day_count = 252,
+#'                  digits = 2)
 #'
 descr_stat <- function(data,
                        start_date = data[1,1],
                        end_date = data[,1][nrow(data)],
-                       day_count = 1) {
+                       day_count = 1,
+                       digits = 2) {
 
   n <- ncol(data)
 
@@ -45,7 +50,7 @@ descr_stat <- function(data,
       check.names = TRUE
     )
 
-    df[, 2:8] <- round(df[, 2:8], 2)
+    df[, 2:8] <- round(df[, 2:8], digits)
 
     return(df)
 
@@ -80,7 +85,7 @@ descr_stat <- function(data,
       check.names = TRUE
     )
 
-    df[, 2:8] <- round(df[, 2:8], 2)
+    df[, 2:8] <- round(df[, 2:8], digits)
 
     return(df)
 
