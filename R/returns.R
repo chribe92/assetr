@@ -37,7 +37,7 @@ returns <- function(get_price, type = "log") {
   if (ncol(get_price) == 2){
 
     if (type == "simple") {
-      returns <- head(as.vector(suppressWarnings(diff(prices[, 2]) / lag(prices[, 2]))), -1)
+      returns <- head(as.vector(suppressWarnings(diff(get_price[, 2]) / lag(get_price[, 2]))), -1)
     }
     if (type == "log") {
       returns <- diff(log(get_price[,2]))
